@@ -87,6 +87,6 @@ public class KiloConverter extends Application
          
          // Display the results.
          resultLabel.setText(String.format("%,.2f miles", miles));
-      }
+      } 
    }
 }
