@@ -1,3 +1,4 @@
+package TextbookApps;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -43,7 +44,7 @@ public class BorderPaneDemo extends Application
       // Create a BorderPane.
       BorderPane borderPane = new BorderPane();
       
-      // Add the buttons to the BorderPane’s regions.
+      // Add the buttons to the BorderPaneï¿½s regions.
       borderPane.setCenter(centerHBox);
       borderPane.setTop(topHBox);
       borderPane.setBottom(bottomHBox);
