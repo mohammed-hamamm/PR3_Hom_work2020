@@ -1,3 +1,5 @@
+import java.io.FileInputStream;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -27,11 +29,12 @@ public class RadioButtonEvent extends Application
    @Override
    public void start(Stage primaryStage)
    {
-      // Create two Image objects.
-      //Image flowerImage = new Image("file:Flower.jpg");
-      Image flowerImage = new Image("TextbookApps/Flower.jpg");
-      //Image sunsetImage = new Image("file:Sunset.jpg");
-      Image sunsetImage = new Image("TextbookApps/Sunset.jpg");
+     // Create two Image objects.
+     Image flowerImage = new Image("file:src/TextbookApps/Flower.jpg");
+     //Image flowerImage = new Image(new FileInputStream("./src/TextbookApps/Flower.jpg"));
+      
+     Image sunsetImage = new Image("file:src/TextbookApps/Sunset.jpg");
+     //Image sunsetImage = new Image(new FileInputStream("./src/TextbookApps/Sunset.jpg"));
       
       // Create an ImageView object.
       ImageView imageView = new ImageView(flowerImage);
