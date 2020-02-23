@@ -10,13 +10,16 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -27,15 +30,19 @@ import javafx.stage.Stage;
 public class ListViewApp extends Application{
     private ListView<String> listViewNames;
     private TextField textFieldName;
-    private Button buttonAdd;
+    private Button buttonAdd, buttonDel;
     @Override
     public void start(Stage primaryStage) throws Exception {
         listViewNames = new ListView<>();
+        //Set ListView to Multiple selections
+        listViewNames.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         textFieldName = new TextField();
         buttonAdd = new Button("Add Name");
-        VBox vBox = new VBox(10, listViewNames,textFieldName,buttonAdd);
-        vBox.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(vBox,260,300);
+        buttonDel = new Button("Delete");
+        HBox hBox = new HBox(10);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(buttonAdd,buttonDel);
+        hBox.setStyle("-fx-background-color:cyan");
 //        EventHandler1 eventHandler1 = new EventHandler1();
 //        buttonAdd.setOnAction(eventHandler1);
 //        buttonAdd.setOnAction(new EventHandler<ActionEvent>() { //Using Anonymous class
@@ -70,8 +77,13 @@ public class ListViewApp extends Application{
         //buttonAdd.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler2);
         // or Using addEventFilter
         buttonAdd.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler2);
-        buttonAdd.addEventFilter(KeyEvent.KEY_PRESSED, eventHandler2);
-        
+        //buttonAdd.addEventFilter(KeyEvent.KEY_PRESSED, eventHandler2);
+        buttonDel.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler2);
+        VBox vBox = new VBox(25, listViewNames,textFieldName,hBox);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setStyle("-fx-background-color:dimgray");
+        Scene scene = new Scene(vBox,260,300);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         primaryStage.setTitle("ListView JavaFX App");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
@@ -105,7 +117,7 @@ public class ListViewApp extends Application{
         @Override
         public void handle(Event event) {
              event.consume();
-            if(event.getSource() == buttonAdd) //Checking the event source
+            if(event.getSource() == buttonAdd) {//Checking the event source
                 if(!textFieldName.getText().equals(""))
                     listViewNames.getItems().add(textFieldName.getText());
                 textFieldName.setText("");
@@ -114,6 +126,9 @@ public class ListViewApp extends Application{
                         .sorted()
                         .collect(Collectors.toList())
                 );
+            }
+            else if(event.getSource() == buttonDel)
+                listViewNames.getItems().removeAll(listViewNames.getSelectionModel().getSelectedItems());
 
            
         }
