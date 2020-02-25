@@ -1,10 +1,13 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 
 public class SimpleMenu extends Application
 {
@@ -24,7 +27,7 @@ public class SimpleMenu extends Application
       MenuBar menuBar = new MenuBar();
  
       // Create the File menu.
-      Menu fileMenu = new Menu("File");
+      Menu fileMenu = new Menu("File");   
       MenuItem exitItem = new MenuItem("Exit");
       fileMenu.getItems().add(exitItem);
       
