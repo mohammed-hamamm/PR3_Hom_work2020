@@ -7,6 +7,7 @@ package Chapter3Apps;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -113,7 +114,19 @@ public class TextAreaPaneController implements Initializable {
                 .stream()
                 .filter(e-> e.getSalary()>=1100)
                 .forEach(e-> textArea.appendText(e+"\n"));
-
+ 
+        listEmployees
+                .stream()
+                .filter(e-> e.getSalary() >=800 && e.getSalary() <1200)
+                .map(e-> new Employee(e.getId(), e.getName(), e.getDepartment(), e.getSalary()*1.02))
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()))
+                .forEach((d, c) -> System.out.println("Dept: "+ d + ", Count: " + c));
+        listEmployees
+                .stream()
+                .sorted(Comparator.comparing(Employee::getSalary).reversed())
+                .map(e -> e.getName() + " " + e.getSalary())
+                .forEach(str-> System.out.println(str));
+                
     }
     
 }
